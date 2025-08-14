@@ -71,6 +71,8 @@ docker-compose -f docker-compose.yml up
 A API estará disponível em: `http://localhost:3000`
 Mongo Express (admin DB) em: `http://localhost:8081`
 
+Você poderá testar as rotas na pasta **client-http**, na raíz do projeto.
+
 ## 📡 Endpoints da API
 
 ### Autenticação
