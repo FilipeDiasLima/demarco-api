@@ -1,0 +1,107 @@
+@baseUrl=http://localhost:3333
+@token={{authenticate.response.body.access_token}}
+
+# @name hello
+GET {{baseUrl}}
+Content-Type: application/json
+
+###
+
+# @name register_user
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "companyName": "Filipe's Company",
+  "fullname": "Filipe Dias",
+  "email": "filipe@email.com",
+  "password": "123123",
+  "birthdate": "1999-04-12",
+  "cpf": "12345278901"
+}
+
+###
+
+# @name authenticate
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+  "email": "filipe@email.com",
+  "password": "123123"
+}
+
+###
+
+# @name create_colaborator
+POST {{baseUrl}}/colaborators
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+ "fullname": "Colaborator Name 4",
+ "role": "manager",
+ "birthdate": "1990-01-02",
+ "cpf": "55566677788"
+}
+
+###
+
+# @name get_colaborators
+GET {{baseUrl}}/colaborators/all?page=1&itemsPerPage=1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+
+# @name toggle_colaborator_status
+PUT {{baseUrl}}/colaborators/toggle-status/689b98aa21b49bcc721cc3c8
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name remove_colaborator
+DELETE {{baseUrl}}/colaborators/689b98aa21b49bcc721cc3c8
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name create_medical_certificate
+POST {{baseUrl}}/medical-certificates
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "collaboratorId": "689b98aa21b49bcc721cc3c8",
+  "certificateDateTime": "2023-04-12T10:00:00Z",
+  "leaveDays": 5,
+  "cid": {
+    "code": "CID123",
+    "description": "Description of CID"
+  },
+  "notes": "Some notes"
+}
+
+###
+
+# @name get_all_medical_certificates
+GET {{baseUrl}}/medical-certificates/all?page=1&itemsPerPage=10
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_cids
+GET {{baseUrl}}/cids/search?search=pn
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_cids_id
+GET {{baseUrl}}/cids/142052508
+Content-Type: application/json
+Authorization: Bearer {{token}}
